@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
         public event Action ShapesChanged;
 
         public ContextMenuStrip CanvasContextMenuStrip => contextMenuStrip1;
+        private int currentShapeIndex = -1;
 
 
         private List<Shape> shapes = new List<Shape>();
@@ -119,7 +121,60 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
         private void fillToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (currentShape != null)
+            {
+                currentShape.ToggleFill();
 
+                fillToolStripMenuItem.Text = currentShape.IsFilled() ? "Unfill" : "Fill";
+
+                Invalidate();
+                ShapesChanged?.Invoke();
+            }
+        }
+
+
+
+
+
+        private void moveToFrontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (currentShape != null)
+            {
+                int index = shapes.IndexOf(currentShape);
+                if (index < shapes.Count - 1)
+                {
+                    shapes.RemoveAt(index);
+                    shapes.Insert(index + 1, currentShape); 
+                    Invalidate(); 
+                    ShapesChanged?.Invoke();
+                }
+            }
+        }
+
+        private void moveToBackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (currentShape != null)
+            {
+                int index = shapes.IndexOf(currentShape);
+                if (index > 0)
+                {
+                    shapes.RemoveAt(index);
+                    shapes.Insert(index - 1, currentShape);
+                    Invalidate();
+                    ShapesChanged?.Invoke();
+                }
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (currentShape != null)
+            {
+                currentShapeIndex = shapes.IndexOf(currentShape);
+
+                moveToFrontToolStripMenuItem.Enabled = currentShapeIndex < shapes.Count - 1; 
+                moveToBackToolStripMenuItem.Enabled = currentShapeIndex > 0;
+            }
         }
     }
 }

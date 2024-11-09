@@ -43,12 +43,13 @@
             contextMenuStrip1.ImageScalingSize = new Size(20, 20);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem, moveToolStripMenuItem, fillToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(211, 104);
+            contextMenuStrip1.Size = new Size(181, 92);
+            contextMenuStrip1.Opening += contextMenuStrip1_Opening;
             // 
             // deleteToolStripMenuItem
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(210, 24);
+            deleteToolStripMenuItem.Size = new Size(180, 22);
             deleteToolStripMenuItem.Text = "Delete";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
@@ -56,37 +57,40 @@
             // 
             moveToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { moveToFrontToolStripMenuItem, moveToBackToolStripMenuItem });
             moveToolStripMenuItem.Name = "moveToolStripMenuItem";
-            moveToolStripMenuItem.Size = new Size(210, 24);
+            moveToolStripMenuItem.Size = new Size(180, 22);
             moveToolStripMenuItem.Text = "Move";
             // 
             // moveToFrontToolStripMenuItem
             // 
             moveToFrontToolStripMenuItem.Name = "moveToFrontToolStripMenuItem";
-            moveToFrontToolStripMenuItem.Size = new Size(224, 26);
+            moveToFrontToolStripMenuItem.Size = new Size(180, 22);
             moveToFrontToolStripMenuItem.Text = "MoveToFront";
+            moveToFrontToolStripMenuItem.Click += moveToFrontToolStripMenuItem_Click;
             // 
             // moveToBackToolStripMenuItem
             // 
             moveToBackToolStripMenuItem.Name = "moveToBackToolStripMenuItem";
-            moveToBackToolStripMenuItem.Size = new Size(224, 26);
+            moveToBackToolStripMenuItem.Size = new Size(180, 22);
             moveToBackToolStripMenuItem.Text = "MoveToBack";
+            moveToBackToolStripMenuItem.Click += moveToBackToolStripMenuItem_Click;
             // 
             // fillToolStripMenuItem
             // 
             fillToolStripMenuItem.Name = "fillToolStripMenuItem";
-            fillToolStripMenuItem.Size = new Size(210, 24);
+            fillToolStripMenuItem.Size = new Size(180, 22);
             fillToolStripMenuItem.Text = "Fill";
             fillToolStripMenuItem.Click += fillToolStripMenuItem_Click;
             // 
             // Canvas
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BorderStyle = BorderStyle.FixedSingle;
             DoubleBuffered = true;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Canvas";
-            Size = new Size(799, 513);
+            Size = new Size(699, 385);
             Paint += Canvas_Paint;
             MouseDown += Canvas_MouseDown;
             MouseMove += Canvas_MouseMove;

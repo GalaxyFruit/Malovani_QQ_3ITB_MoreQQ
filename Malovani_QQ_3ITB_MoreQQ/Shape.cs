@@ -45,7 +45,18 @@ namespace Malovani_QQ_3ITB_MoreQQ
             this.color = Color.FromArgb(data.r, data.g, data.b);
             
             InitRuntimeValues();
-        } 
+        }
+
+        public void ToggleFill()
+        {
+            filled = !filled;
+        }
+
+        public bool IsFilled()
+        {
+            return filled;
+        }
+
 
         private void InitRuntimeValues()
         {

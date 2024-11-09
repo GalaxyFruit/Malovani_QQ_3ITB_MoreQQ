@@ -33,8 +33,8 @@ namespace Malovani_QQ_3ITB_MoreQQ
             foreach (var item in canvas1.Shapes)
             {
                 listBox1.Items.Add(item);
-                UpdateLabel1();
             }
+            UpdateLabel1();
         }
 
         private void Form1_Load(object sender, EventArgs e)
