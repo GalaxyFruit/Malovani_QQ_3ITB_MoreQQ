@@ -22,20 +22,27 @@ namespace Malovani_QQ_3ITB_MoreQQ
         public IEnumerable<Shape> LoadShapes(string path)
         {
             var content = File.ReadAllText(path);
-            var dtos = JsonConvert.DeserializeObject<IEnumerable<Shape.ShapeDTO>>(content);
-
-            // Some fixes here
-            return dtos.Select(dto =>
+            if(content != null)
             {
-                if(loadedAssemblies.ContainsKey(dto.shapeType))
+                var dtos = JsonConvert.DeserializeObject<IEnumerable<Shape.ShapeDTO>>(content);
+
+                // Some fixes here
+                return dtos.Select(dto =>
                 {
-                    var type = loadedAssemblies[dto.shapeType].GetType(dto.shapeType);
-                    return Activator.CreateInstance(type, dto) as Shape;
-                } else
-                {
-                    return null;
-                }
-            });
+                    if (loadedAssemblies.ContainsKey(dto.shapeType))
+                    {
+                        Type type = loadedAssemblies[dto.shapeType].GetType(dto.shapeType);
+                        return Activator.CreateInstance(type, dto) as Shape;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                });
+            } else
+            {
+                return null;
+            }
         }
 
         public Assembly LoadAssemblyFromFile(string path)
