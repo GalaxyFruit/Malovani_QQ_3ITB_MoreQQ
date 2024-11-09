@@ -1,4 +1,4 @@
-using System.Diagnostics;
+ï»¿using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -7,16 +7,16 @@ namespace Malovani_QQ_3ITB_MoreQQ
     public partial class Form1 : Form
     {
         /*
-     Zeptat se DJ na svìtla
+     Zeptat se DJ na svÃ¬tla
      TODO: 
      * volba barvy ---
-     * hezèí vykreslení ---
-     * hezèí èára ---
-     * pøesouvání objektù ---
-     * clear objektù ---
+     * hezÃ¨Ã­ vykreslenÃ­ ---
+     * hezÃ¨Ã­ Ã¨Ã¡ra ---
+     * pÃ¸esouvÃ¡nÃ­ objektÃ¹ ---
+     * clear objektÃ¹ ---
      * square ---
      * reflexe - (assembly)
-     * ukládání
+     * uklÃ¡dÃ¡nÃ­
      */
 
         FileManager fileManager = new FileManager();
@@ -129,7 +129,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 }
                 if (notLoadedCounter > 0)
                 {
-                    MessageBox.Show($"{notLoadedCounter} objektù se nepodaøilo naèíst, protože chybí knihovny, ze kterých byly vytvoøeny.");
+                    MessageBox.Show($"{notLoadedCounter} objektÅ¯ se nepodaÅ™ilo naÄÃ­st, protoÅ¾e chybÃ­ knihovny, ze kterÃ½ch byly vytvoÅ™eny.");
                 }
             }
         }
@@ -150,7 +150,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 }
                 else
                 {
-                    MessageBox.Show("Nepodaøilo se naèíst knihovnu " + path);
+                    MessageBox.Show("NepodaÅ™ilo se naÄÃ­st knihovnu " + path);
                 }
             }
         }
@@ -163,7 +163,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
         private void UpdateLabel1()
         {
-            label1.Text = $"Poèet: {listBox1.Items.Count}";
+            label1.Text = $"PoÄet: {listBox1.Items.Count}";
         }
 
         private void listBox1_MouseDown(object sender, MouseEventArgs e)
@@ -174,6 +174,20 @@ namespace Malovani_QQ_3ITB_MoreQQ
             }
         }
 
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            if (index >= 0 && index < listBox1.Items.Count)
+            {
+                canvas1.Shapes.ToList().ForEach(shape => shape.Highlight(false));
 
+                var selectedShape = listBox1.Items[index] as Shape;
+                if (selectedShape != null)
+                {
+                    selectedShape.Highlight(true);
+                    canvas1.Invalidate();
+                }
+            }
+        }
     }
 }

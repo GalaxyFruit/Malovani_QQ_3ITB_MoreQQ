@@ -242,6 +242,7 @@
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(267, 544);
             listBox1.TabIndex = 0;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             listBox1.MouseDown += listBox1_MouseDown;
             // 
             // statusStrip1
