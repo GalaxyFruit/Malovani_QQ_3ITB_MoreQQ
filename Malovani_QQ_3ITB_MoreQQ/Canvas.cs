@@ -11,10 +11,12 @@ using System.Windows.Forms;
 
 namespace Malovani_QQ_3ITB_MoreQQ
 {
-
     public partial class Canvas : UserControl
     {
         public event Action ShapesChanged;
+
+        public ContextMenuStrip CanvasContextMenuStrip => contextMenuStrip1;
+
 
         private List<Shape> shapes = new List<Shape>();
         public IReadOnlyList<Shape> Shapes => shapes;
@@ -50,6 +52,14 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 {
                     currentShape.SetDragOffset(e.X, e.Y);
                     isDragging = true;
+                }
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                if (currentShape != null)
+                {
+                    // HINT : contextMenuStrip1.Items[1].Enabled = false;
+                    contextMenuStrip1.Show(this, e.Location);
                 }
             }
         }
@@ -97,6 +107,19 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             shapes.ForEach(shape => shape.Draw(e.Graphics));
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            shapes.Remove(currentShape);
+            currentShape = null;
+            Invalidate();
+            ShapesChanged?.Invoke();
+        }
+
+        private void fillToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

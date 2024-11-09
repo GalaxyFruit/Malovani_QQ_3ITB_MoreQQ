@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace Malovani_QQ_3ITB_MoreQQ
 {
@@ -31,6 +33,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
             foreach (var item in canvas1.Shapes)
             {
                 listBox1.Items.Add(item);
+                UpdateLabel1();
             }
         }
 
@@ -46,7 +49,8 @@ namespace Malovani_QQ_3ITB_MoreQQ
         private void LoadTypesFromAssembly(Assembly ass)
         {
             var types = ass.GetTypes();
-            var shapeTypes = types.Where(t => {
+            var shapeTypes = types.Where(t =>
+            {
                 if (t.IsSubclassOf(typeof(Shape)))
                 {
                     fileManager.AddAssembly(t, ass);
@@ -118,12 +122,12 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 int notLoadedCounter = 0;
                 foreach (var shape in shapes)
                 {
-                    if(shape != null)
+                    if (shape != null)
                         canvas1.AddShape(shape);
                     else
                         notLoadedCounter++;
                 }
-                if(notLoadedCounter > 0)
+                if (notLoadedCounter > 0)
                 {
                     MessageBox.Show($"{notLoadedCounter} objektù se nepodaøilo naèíst, protože chybí knihovny, ze kterých byly vytvoøeny.");
                 }
@@ -156,5 +160,20 @@ namespace Malovani_QQ_3ITB_MoreQQ
             List<Assembly> asses = fileManager.GetAllCachedDlls();
             asses.ForEach(ass => LoadTypesFromAssembly(ass));
         }
+
+        private void UpdateLabel1()
+        {
+            label1.Text = $"Poèet: {listBox1.Items.Count}";
+        }
+
+        private void listBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && listBox1.SelectedItem != null)
+            {
+                canvas1.CanvasContextMenuStrip.Show(listBox1, e.Location);
+            }
+        }
+
+
     }
 }

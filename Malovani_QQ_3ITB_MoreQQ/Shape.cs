@@ -12,7 +12,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
         protected int y;
         protected int width;
         protected int height;
-        protected bool filled;
+        public bool filled { protected set; get; }
         protected Color color;
         public Pen pen;
         protected Brush brush;
@@ -82,6 +82,11 @@ namespace Malovani_QQ_3ITB_MoreQQ
         {
             this.x = mx - dragOffsetX;
             this.y = my - dragOffsetY;
+        }
+
+        public override string ToString()
+        {
+            return $"{GetType().Name} [{x},{y}] {color}";
         }
 
         public ShapeDTO GetDTO()
