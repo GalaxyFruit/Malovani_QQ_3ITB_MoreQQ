@@ -184,10 +184,12 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 var selectedShape = listBox1.Items[index] as Shape;
                 if (selectedShape != null)
                 {
-                    selectedShape.Highlight(true);
+                    canvas1.SetCurrentShape(selectedShape); 
+                    selectedShape.Highlight(true); 
                     canvas1.Invalidate();
                 }
             }
         }
+
     }
 }

@@ -136,6 +136,7 @@ namespace Malovani_QQ_3ITB_MoreQQ
 
 
 
+
         private void moveToFrontToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (currentShape != null)
@@ -176,5 +177,12 @@ namespace Malovani_QQ_3ITB_MoreQQ
                 moveToBackToolStripMenuItem.Enabled = currentShapeIndex > 0;
             }
         }
+
+        public void SetCurrentShape(Shape shape)
+        {
+            currentShape = shape;
+            Invalidate();
+        }
+
     }
 }
